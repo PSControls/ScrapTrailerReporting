@@ -1,0 +1,561 @@
+[
+    {
+        "id": "bf7747e5f5112640",
+        "type": "tab",
+        "label": "Scrap Trailer Reporting",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c70a07b550a4ae1e",
+        "type": "group",
+        "z": "bf7747e5f5112640",
+        "name": "Update the maximum scrap weight value per bin",
+        "style": {
+            "stroke": "#a4a4a4",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "b9aa1490fc2d931c",
+            "0bf522734d5e3857",
+            "416e4572bfa220db",
+            "1257bccc1b2e33bc",
+            "84fec3ceecc3ad39",
+            "bb1687f5c1a6459b",
+            "aa060e75108dedf3",
+            "1c927bc070c07ab4"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 712,
+        "h": 242
+    },
+    {
+        "id": "be0fd2a376189033",
+        "type": "group",
+        "z": "bf7747e5f5112640",
+        "name": "Report out the last max scrap value when bin is no longer present",
+        "style": {
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "1245b0a95bbc36fd",
+            "782eb915cfb03843",
+            "7095639b29e15983",
+            "f4c6ab462180a295",
+            "de54a527bb302774",
+            "0ee2cc78c490bd73",
+            "f0056bdc5dcd4eee",
+            "531ed9e8141932aa",
+            "11878e99b0718ee8",
+            "bc297c8c802c51cb"
+        ],
+        "x": 34,
+        "y": 279,
+        "w": 1232,
+        "h": 242
+    },
+    {
+        "id": "6554f85087e73d85",
+        "type": "group",
+        "z": "bf7747e5f5112640",
+        "name": "send errors and notifications to console",
+        "style": {
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "4bb2f9456539acad",
+            "9cbb37d496cad343",
+            "d5b3ffb5227a93e4",
+            "840806a012049213",
+            "15218392c8807bb0"
+        ],
+        "x": 34,
+        "y": 539,
+        "w": 652,
+        "h": 142
+    },
+    {
+        "id": "547ee68745e9fe3e",
+        "type": "eth-ip endpoint",
+        "address": "128.121.50.1",
+        "slot": "0",
+        "cycletime": "200",
+        "name": "",
+        "vartable": {
+            "": {
+                "Bin_Left.Weight_Current": {
+                    "type": "DINT"
+                },
+                "Bin_Right.Weight_Current": {
+                    "type": "DINT"
+                },
+                "Bin_Left.Present": {
+                    "type": "BOOL"
+                },
+                "Bin_Right.Present": {
+                    "type": "BOOL"
+                }
+            }
+        }
+    },
+    {
+        "id": "b9aa1490fc2d931c",
+        "type": "eth-ip in",
+        "z": "bf7747e5f5112640",
+        "g": "c70a07b550a4ae1e",
+        "endpoint": "547ee68745e9fe3e",
+        "mode": "single",
+        "variable": "Bin_Left.Weight_Current",
+        "program": "",
+        "name": "",
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "aa060e75108dedf3"
+            ]
+        ]
+    },
+    {
+        "id": "0bf522734d5e3857",
+        "type": "eth-ip in",
+        "z": "bf7747e5f5112640",
+        "g": "c70a07b550a4ae1e",
+        "endpoint": "547ee68745e9fe3e",
+        "mode": "single",
+        "variable": "Bin_Right.Weight_Current",
+        "program": "",
+        "name": "",
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "1c927bc070c07ab4"
+            ]
+        ]
+    },
+    {
+        "id": "416e4572bfa220db",
+        "type": "complete",
+        "z": "bf7747e5f5112640",
+        "g": "c70a07b550a4ae1e",
+        "name": "",
+        "scope": [
+            "1c927bc070c07ab4"
+        ],
+        "uncaught": false,
+        "x": 390,
+        "y": 220,
+        "wires": [
+            [
+                "1257bccc1b2e33bc"
+            ]
+        ]
+    },
+    {
+        "id": "1257bccc1b2e33bc",
+        "type": "change",
+        "z": "bf7747e5f5112640",
+        "g": "c70a07b550a4ae1e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "max_weightRight",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "84fec3ceecc3ad39",
+        "type": "complete",
+        "z": "bf7747e5f5112640",
+        "g": "c70a07b550a4ae1e",
+        "name": "",
+        "scope": [
+            "aa060e75108dedf3"
+        ],
+        "uncaught": false,
+        "x": 390,
+        "y": 100,
+        "wires": [
+            [
+                "bb1687f5c1a6459b"
+            ]
+        ]
+    },
+    {
+        "id": "bb1687f5c1a6459b",
+        "type": "change",
+        "z": "bf7747e5f5112640",
+        "g": "c70a07b550a4ae1e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "max_weightLeft",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aa060e75108dedf3",
+        "type": "function",
+        "z": "bf7747e5f5112640",
+        "g": "c70a07b550a4ae1e",
+        "name": "check maximum",
+        "func": "let max_weightLeft; \n\nif (global.get('max_weightLeft_init') == 0)\n{\n    flow.set('max_weightLeft', msg.payload);\n    global.set('max_weightLeft_init', 1);\n}\n\nmax_weightLeft = flow.get('max_weightLeft');\n\nif (msg.payload > max_weightLeft && (Math.abs(msg.payload - max_weightLeft) < 1000)) \n{\n    max_weightLeft = msg.payload ; \n}\n\nmsg.payload = max_weightLeft;\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set('max_weightLeft_init', 0);",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c927bc070c07ab4",
+        "type": "function",
+        "z": "bf7747e5f5112640",
+        "g": "c70a07b550a4ae1e",
+        "name": "check maximum",
+        "func": "let max_weightRight; \n\nif (global.get('max_weightRight_init') == 0)\n{\n    flow.set('max_weightRight', msg.payload);\n    global.set('max_weightRight_init', 1);\n}\n\nmax_weightRight = flow.get('max_weightRight');\n\nif (msg.payload > max_weightRight && (Math.abs(msg.payload - max_weightRight) < 1000)) \n{\n    max_weightRight = msg.payload ; \n}\n\nmsg.payload = max_weightRight;\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1245b0a95bbc36fd",
+        "type": "eth-ip in",
+        "z": "bf7747e5f5112640",
+        "g": "be0fd2a376189033",
+        "endpoint": "547ee68745e9fe3e",
+        "mode": "single",
+        "variable": "Bin_Left.Present",
+        "program": "",
+        "name": "",
+        "x": 140,
+        "y": 320,
+        "wires": [
+            [
+                "7095639b29e15983"
+            ]
+        ]
+    },
+    {
+        "id": "782eb915cfb03843",
+        "type": "eth-ip in",
+        "z": "bf7747e5f5112640",
+        "g": "be0fd2a376189033",
+        "endpoint": "547ee68745e9fe3e",
+        "mode": "single",
+        "variable": "Bin_Right.Present",
+        "program": "",
+        "name": "",
+        "x": 150,
+        "y": 440,
+        "wires": [
+            [
+                "f4c6ab462180a295"
+            ]
+        ]
+    },
+    {
+        "id": "7095639b29e15983",
+        "type": "function",
+        "z": "bf7747e5f5112640",
+        "g": "be0fd2a376189033",
+        "name": "capture data to store",
+        "func": "let gate = {} //controls gate opening and closing to allow data to pass to csv\nif (!(msg.payload)) //check if bin is present on scale\n{\n    let date = new Date;\n    let dateString = date.toLocaleDateString();\n    let timeString = date.toLocaleTimeString();\n    let data = [] \n\n    data[0] = dateString; //create array with date and time bin stopped being present\n    data[1] = timeString;\n    data[2] = flow.get('max_weightLeft') - 23000; //set the last max weight minus the trailer weight as the value to report\n    flow.set('max_weightLeft', 25000); //then reset max weight for next fill\n    \n    gate.topic = \"control\";\n    gate.payload = \"open\";\n    msg.payload = data ; //after gate is open/closed, complete function sends this payload to csv\n}\nelse \n{\n    gate.topic = \"control\"; //if bin is present, close gate\n    gate.payload = \"close\";\n    msg.payload = null; \n};\n\nreturn  gate;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 320,
+        "wires": [
+            [
+                "de54a527bb302774"
+            ]
+        ]
+    },
+    {
+        "id": "f4c6ab462180a295",
+        "type": "function",
+        "z": "bf7747e5f5112640",
+        "g": "be0fd2a376189033",
+        "name": "capture data to store",
+        "func": "let gate = {} //controls gate opening and closing to allow data to pass to csv\nif (!(msg.payload)) //check if bin is present on scale\n{\n    let date = new Date;\n    let dateString = date.toLocaleDateString();\n    let timeString = date.toLocaleTimeString();\n    let data = [] \n\n    data[0] = dateString; //create array with date and time bin stopped being present\n    data[1] = timeString;\n    data[2] = flow.get('max_weightRight') - 23000; //set the last max weight minus the trailer weight as the value to report\n    flow.set('max_weightRight', 25000); //then reset max weight for next fill\n    \n    gate.topic = \"control\";\n    gate.payload = \"open\";\n    msg.payload = data ; //after gate is open/closed, complete function sends this payload to csv\n}\nelse \n{\n    gate.topic = \"control\"; //if bin is present, close gate\n    gate.payload = \"close\";\n    msg.payload = null; \n};\n\nreturn  gate;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "531ed9e8141932aa"
+            ]
+        ]
+    },
+    {
+        "id": "de54a527bb302774",
+        "type": "gate",
+        "z": "bf7747e5f5112640",
+        "g": "be0fd2a376189033",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 590,
+        "y": 320,
+        "wires": [
+            [
+                "bc297c8c802c51cb"
+            ]
+        ]
+    },
+    {
+        "id": "0ee2cc78c490bd73",
+        "type": "complete",
+        "z": "bf7747e5f5112640",
+        "g": "be0fd2a376189033",
+        "name": "",
+        "scope": [
+            "7095639b29e15983"
+        ],
+        "uncaught": false,
+        "x": 410,
+        "y": 360,
+        "wires": [
+            [
+                "de54a527bb302774"
+            ]
+        ]
+    },
+    {
+        "id": "f0056bdc5dcd4eee",
+        "type": "complete",
+        "z": "bf7747e5f5112640",
+        "g": "be0fd2a376189033",
+        "name": "",
+        "scope": [
+            "f4c6ab462180a295"
+        ],
+        "uncaught": false,
+        "x": 410,
+        "y": 480,
+        "wires": [
+            [
+                "531ed9e8141932aa"
+            ]
+        ]
+    },
+    {
+        "id": "531ed9e8141932aa",
+        "type": "gate",
+        "z": "bf7747e5f5112640",
+        "g": "be0fd2a376189033",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 590,
+        "y": 440,
+        "wires": [
+            [
+                "bc297c8c802c51cb"
+            ]
+        ]
+    },
+    {
+        "id": "11878e99b0718ee8",
+        "type": "file",
+        "z": "bf7747e5f5112640",
+        "g": "be0fd2a376189033",
+        "name": "",
+        "filename": "/home/controls-orin-1/Desktop/scrapWeightReport.csv",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1040,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc297c8c802c51cb",
+        "type": "csv",
+        "z": "bf7747e5f5112640",
+        "g": "be0fd2a376189033",
+        "name": "",
+        "sep": ",",
+        "hdrin": false,
+        "hdrout": "once",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "Date, Time, Weight",
+        "skip": "0",
+        "strings": false,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 750,
+        "y": 380,
+        "wires": [
+            [
+                "11878e99b0718ee8"
+            ]
+        ]
+    },
+    {
+        "id": "4bb2f9456539acad",
+        "type": "catch",
+        "z": "bf7747e5f5112640",
+        "g": "6554f85087e73d85",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 120,
+        "y": 580,
+        "wires": [
+            [
+                "9cbb37d496cad343"
+            ]
+        ]
+    },
+    {
+        "id": "9cbb37d496cad343",
+        "type": "debug",
+        "z": "bf7747e5f5112640",
+        "g": "6554f85087e73d85",
+        "name": "output error",
+        "active": true,
+        "tosidebar": false,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "d5b3ffb5227a93e4",
+        "type": "complete",
+        "z": "bf7747e5f5112640",
+        "g": "6554f85087e73d85",
+        "name": "",
+        "scope": [
+            "11878e99b0718ee8"
+        ],
+        "uncaught": false,
+        "x": 130,
+        "y": 640,
+        "wires": [
+            [
+                "840806a012049213"
+            ]
+        ]
+    },
+    {
+        "id": "840806a012049213",
+        "type": "function",
+        "z": "bf7747e5f5112640",
+        "g": "6554f85087e73d85",
+        "name": "set output notif",
+        "func": "msg.payload = \"Scrap trailer has been emptied and a value of \" + flow.get('lastValue_scrapWeight') + \" has been stored\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 640,
+        "wires": [
+            [
+                "15218392c8807bb0"
+            ]
+        ]
+    },
+    {
+        "id": "15218392c8807bb0",
+        "type": "debug",
+        "z": "bf7747e5f5112640",
+        "g": "6554f85087e73d85",
+        "name": "output notification",
+        "active": true,
+        "tosidebar": false,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 640,
+        "wires": []
+    }
+]

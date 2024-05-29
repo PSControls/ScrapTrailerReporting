@@ -1,0 +1,12 @@
+{
+    "name": "Scrap_Trailer_Reporting",
+    "description": "Scrap trailer weight reporting",
+    "version": "0.0.1",
+    "dependencies": {},
+    "node-red": {
+        "settings": {
+            "flowFile": "scrapTrailer.json",
+            "credentialsFile": "scrapTrailer_cred.json"
+        }
+    }
+}
