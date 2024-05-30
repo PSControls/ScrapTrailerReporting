@@ -1,7 +1,7 @@
-Scrap_Trailer_Reporting
+ScrapTrailerReporting
 =======================
 
-Scrap trailer weight reporting
+A Node-Red project to monitor the filling and emptying of the scrap trailer and save scrap weigth values to a csv file. 
 
 ### About
 
