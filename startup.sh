@@ -1,6 +1,6 @@
 mkdir ~/ScrapTrailerReporting
 cd ~/ScrapTrailerReporting
 curl -o ~/ScrapTrailerReporting/Dockerfile https://raw.githubusercontent.com/PSControls/ScrapTrailerReporting/master/Dockerfile 
-docker container prune
+docker container prune -y
 docker build --no-cache -t node-red-project .
 docker run --name nr-container -p 1880:1880 node-red-project
