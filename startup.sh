@@ -1,1 +1,4 @@
-wget -O - https://raw.githubusercontent.com/PSControls/ScrapTrailerReporting/master/Dockerfile | bash
+cd ~
+mkdir ScrapTrailerReporting
+cd ./ScrapTrailerReporting
+curl https://raw.githubusercontent.com/PSControls/ScrapTrailerReporting/master/Dockerfile 
