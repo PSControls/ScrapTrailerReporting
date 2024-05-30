@@ -1,4 +1,4 @@
-mkdir $HOME/nr-projects/ScrapTrailerReporting
+mkdir ~/nr-projects/ScrapTrailerReporting
 cd $HOME/nr-projects/ScrapTrailerReporting
 curl -o $HOME/nr-projects/ScrapTrailerReporting/Dockerfile https://raw.githubusercontent.com/PSControls/ScrapTrailerReporting/master/Dockerfile 
 docker build --no-cache -t ScrapTrailerReporting .
