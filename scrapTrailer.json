@@ -51,13 +51,11 @@
             "f0056bdc5dcd4eee",
             "531ed9e8141932aa",
             "11878e99b0718ee8",
-            "bc297c8c802c51cb",
-            "456c42e97122117d",
-            "e382eca6b137ccf2"
+            "bc297c8c802c51cb"
         ],
         "x": 34,
         "y": 279,
-        "w": 1372,
+        "w": 1252,
         "h": 242
     },
     {
@@ -309,7 +307,7 @@
         "z": "bf7747e5f5112640",
         "g": "be0fd2a376189033",
         "name": "capture data to store",
-        "func": "let gate = {} //controls gate opening and closing to allow data to pass to csv\nif (!(msg.payload) && flow.get('set_gateLeft')) //check if bin is present on scale\n{\n    let date = new Date;\n    let dateString = date.toLocaleDateString();\n    let timeString = date.toLocaleTimeString();\n    let data = [] \n\n    data[0] = dateString; //create array with date and time bin stopped being present\n    data[1] = timeString;\n    data[2] = flow.get('max_weightLeft') - 23000; //set the last max weight minus the trailer weight as the value to report\n    flow.set('max_weightLeft', 25000); //then reset max weight for next fill\n    \n    gate.topic = \"control\";\n    gate.payload = \"open\";\n    msg.payload = data ; //after gate is open/closed, complete function sends this payload to csv\n}\nelse \n{\n    gate.topic = \"control\"; //if bin is present, close gate\n    gate.payload = \"close\";\n    flow.set('set_gateLeft', true);\n    msg.payload = null; \n};\n\nreturn  gate;",
+        "func": "let gate = {} //controls gate opening and closing to allow data to pass to csv\nif (!(msg.payload)) //check if bin is present on scale\n{\n    let date = new Date;\n    let dateString = date.toLocaleDateString();\n    let timeString = date.toLocaleTimeString();\n    let data = [] \n\n    data[0] = dateString; //create array with date and time bin stopped being present\n    data[1] = timeString;\n    data[2] = flow.get('max_weightLeft') - 23000; //set the last max weight minus the trailer weight as the value to report\n    flow.set('max_weightLeft', 25000); //then reset max weight for next fill\n    \n    gate.topic = \"control\";\n    gate.payload = \"open\";\n    msg.payload = data ; //after gate is open/closed, complete function sends this payload to csv\n}\nelse \n{\n    gate.topic = \"control\"; //if bin is present, close gate\n    gate.payload = \"close\";\n    msg.payload = null; \n};\n\nreturn  gate;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -330,7 +328,7 @@
         "z": "bf7747e5f5112640",
         "g": "be0fd2a376189033",
         "name": "capture data to store",
-        "func": "let gate = {} //controls gate opening and closing to allow data to pass to csv\nif (!(msg.payload) && flow.get('set_weightRight')) //check if bin is present on scale\n{\n    let date = new Date;\n    let dateString = date.toLocaleDateString();\n    let timeString = date.toLocaleTimeString();\n    let data = [] \n\n    data[0] = dateString; //create array with date and time bin stopped being present\n    data[1] = timeString;\n    data[2] = flow.get('max_weightRight') - 23000; //set the last max weight minus the trailer weight as the value to report\n    flow.set('max_weightRight', 25000); //then reset max weight for next fill\n    \n    gate.topic = \"control\";\n    gate.payload = \"open\";\n    msg.payload = data ; //after gate is open/closed, complete function sends this payload to csv\n}\nelse \n{\n    gate.topic = \"control\"; //if bin is present, close gate\n    gate.payload = \"close\";\n    flow.set('set_gateRight', true);\n    msg.payload = null; \n};\n\nreturn  gate;\n\n",
+        "func": "let gate = {} //controls gate opening and closing to allow data to pass to csv\nif (!(msg.payload)) //check if bin is present on scale\n{\n    let date = new Date;\n    let dateString = date.toLocaleDateString();\n    let timeString = date.toLocaleTimeString();\n    let data = [] \n\n    data[0] = dateString; //create array with date and time bin stopped being present\n    data[1] = timeString;\n    data[2] = flow.get('max_weightRight') - 23000; //set the last max weight minus the trailer weight as the value to report\n    flow.set('max_weightRight', 25000); //then reset max weight for next fill\n    \n    gate.topic = \"control\";\n    gate.payload = \"open\";\n    msg.payload = data ; //after gate is open/closed, complete function sends this payload to csv\n\n}\nelse \n{\n    gate.topic = \"control\"; //if bin is present, close gate\n    gate.payload = \"close\";\n    msg.payload = null; \n};\n\nreturn  gate;\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -364,7 +362,7 @@
         "y": 320,
         "wires": [
             [
-                "456c42e97122117d"
+                "bc297c8c802c51cb"
             ]
         ]
     },
@@ -423,7 +421,7 @@
         "y": 440,
         "wires": [
             [
-                "e382eca6b137ccf2"
+                "bc297c8c802c51cb"
             ]
         ]
     },
@@ -439,7 +437,7 @@
         "createDir": true,
         "overwriteFile": "false",
         "encoding": "none",
-        "x": 1180,
+        "x": 1060,
         "y": 380,
         "wires": [
             []
@@ -461,7 +459,7 @@
         "strings": false,
         "include_empty_strings": "",
         "include_null_values": "",
-        "x": 890,
+        "x": 770,
         "y": 380,
         "wires": [
             [
@@ -559,53 +557,5 @@
         "x": 540,
         "y": 640,
         "wires": []
-    },
-    {
-        "id": "456c42e97122117d",
-        "type": "switch",
-        "z": "bf7747e5f5112640",
-        "g": "be0fd2a376189033",
-        "name": "switch",
-        "property": "set_gateLeft",
-        "propertyType": "flow",
-        "rules": [
-            {
-                "t": "false"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 730,
-        "y": 320,
-        "wires": [
-            [
-                "bc297c8c802c51cb"
-            ]
-        ]
-    },
-    {
-        "id": "e382eca6b137ccf2",
-        "type": "switch",
-        "z": "bf7747e5f5112640",
-        "g": "be0fd2a376189033",
-        "name": "switch",
-        "property": "set_gateRight",
-        "propertyType": "flow",
-        "rules": [
-            {
-                "t": "false"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 730,
-        "y": 440,
-        "wires": [
-            [
-                "bc297c8c802c51cb"
-            ]
-        ]
     }
 ]
